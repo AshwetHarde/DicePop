@@ -13,9 +13,9 @@ A fun and engaging dice game for two players or play against an intelligent bot.
 - **Responsive Design**: Works seamlessly on desktop, tablet, and mobile devices
 - **Portrait Mode Support**: Automatic rotation prompt for mobile devices
 - **Fullscreen Mode**: Immersive fullscreen gaming experience
-- **Dark Theme**: Modern, sleek dark interface with plastic-style design
+- **Theme**: Modern, sleek interface with plastic-style design
 - **Real-time Score Updates**: Watch your scores update as you play
-- **Bot AI**: Smart bot that makes strategic decisions based on game state
+- **Bot**: Smart bot that makes strategic decisions based on game state
 
 ## Prerequisites
 

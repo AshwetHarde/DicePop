@@ -86,19 +86,9 @@ export function useGameLogic(playRollSound, stopRollSound, playPressSound, initi
   useEffect(() => {
     if (vsBot && activePlayer === 1 && playing && !winner) {
       setIsBotThinking(true);
-
+      
       const timer = setTimeout(() => {
-        // More aggressive bot logic
-        const botTotalScore = scores[1] + currentScore;
-        const playerScore = scores[0];
-        const scoreDifference = botTotalScore - playerScore;
-
-        // Bot holds if:
-        // 1. Has 25+ points (increased from 20)
-        // 2. Is close to winning (within 15 points)
-        // 3. Has a significant lead (20+ points ahead)
-        // 4. Current score is high enough to be safe (30+ points)
-        if (currentScore >= 25 || botTotalScore >= WINNING_SCORE - 15 || scoreDifference >= 20 || currentScore >= 30) {
+        if (currentScore >= 20 || scores[1] + currentScore >= WINNING_SCORE) {
           // Bot holds
           hold();
           setIsBotThinking(false);
@@ -111,7 +101,7 @@ export function useGameLogic(playRollSound, stopRollSound, playPressSound, initi
             processRoll(diceValue);
             setIsRolling(false);
             stopRollSound();
-
+            
             // Allow the state changes to propagate before letting bot act again
             if (diceValue !== 1) {
               setTimeout(() => {
