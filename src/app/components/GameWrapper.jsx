@@ -123,6 +123,36 @@ export default function GameWrapper({ vsBot: initialVsBot = false, soundEnabled:
     };
   }, [soundEnabled, winner]);
 
+  // Request fullscreen when game starts
+  useEffect(() => {
+    const requestFullscreen = async () => {
+      try {
+        if (document.documentElement.requestFullscreen) {
+          await document.documentElement.requestFullscreen();
+        } else if (document.documentElement.webkitRequestFullscreen) {
+          await document.documentElement.webkitRequestFullscreen();
+        } else if (document.documentElement.msRequestFullscreen) {
+          await document.documentElement.msRequestFullscreen();
+        }
+      } catch (err) {
+        console.log('Fullscreen request failed:', err);
+      }
+    };
+
+    requestFullscreen();
+
+    return () => {
+      // Exit fullscreen when component unmounts
+      if (document.exitFullscreen) {
+        document.exitFullscreen().catch(() => {});
+      } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen().catch(() => {});
+      } else if (document.msExitFullscreen) {
+        document.msExitFullscreen().catch(() => {});
+      }
+    };
+  }, []);
+
   const handleBackClick = () => {
     playPressSound();
     setShowQuitModal(true);
